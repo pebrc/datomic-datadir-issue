@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 trap "kill 0" SIGINT
-DATOMIC=/opt/sw/datomic-pro-0.9.5350
+export DATOMIC=/opt/sw/datomic-pro-0.9.5350
 WORKDIR=`pwd`
 CONFIG=$WORKDIR/cassandra-txtor.properties
 DATADIR=/var/lib/datomic
@@ -14,11 +14,5 @@ sudo chown $USER $DATADIR
 ($DATOMIC/bin/transactor $CONFIG) &
 TXPRC=$!
 echo  "Datomic is running (PID $TXPRC)"
-#(
-#    sleep 60
-#    echo "Stopping Datomic"
-#    kill $TXPRC
-#) &
-sleep 10
 java -cp "$DATOMIC/lib/*:$DATOMIC/datomic-pro-0.9.5350.jar" clojure.main $WORKDIR/trigger-write.clj
 
