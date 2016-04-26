@@ -21,8 +21,16 @@ sudo chmod -R 555 $DATOMIC/data
 #create configured data dir
 sudo mkdir -p $DATADIR
 sudo chown $USER $DATADIR
-($DATOMIC/bin/transactor $CONFIG) &
+if [ $# -eq 0 ]
+then
+    ($DATOMIC/bin/transactor  $CONFIG) &
+else
+    echo "Starting transactor with workaround enabled"
+    ($DATOMIC/bin/transactor -Ddatomic.dataDir=$DATADIR $CONFIG) &
+fi
+
+
 TXPRC=$!
 echo  "Datomic is running (PID $TXPRC)"
-java -cp "$DATOMIC/lib/*:$DATOMIC/datomic-pro-$DATOMICVERSION.jar" clojure.main $WORKDIR/trigger-write.clj
+java -cp "$DATOMIC/lib/*:$DATOMIC/datomic-pro-$DATOMICVERSION.jar" clojure.main $WORKDIR/trigger-write.clj 
 

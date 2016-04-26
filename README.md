@@ -37,6 +37,9 @@ What it does
 7. transactor ignores the data-dir setting tries to write to distribution directory which fails (see step 1) and exits.
 
 
-
+Workaround
+==========
+1. specifying the configured data-dir via system property directly as in ```-Ddatomic.dataDir=$DATADIR```
+2. ```./run.sh w``` (or any argument to the script) to demonstrate the workaround
 
 
