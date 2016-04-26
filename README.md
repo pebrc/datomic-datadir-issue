@@ -21,8 +21,9 @@ How to run
 
 Platform Specifics/Tested with
 ===========
-* Mac OS X/datomic pro 0.9.5390/cassandra + dev storage
+* Mac OS X/datomic pro 0.9.5390/datomic pro 0.9.5359/cassandra + dev storage
 * You might need to adjust the hardcode 2 sec wait for the transactor to boot up in trigger-write.clj
+
 
 
 What it does
