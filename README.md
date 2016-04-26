@@ -29,7 +29,7 @@ Platform Specifics/Tested with
 What it does
 ============
 1. removes write permissions from the datomic distribution data dir
-2. startes a transactor with a custom data-dir configured via property file
+2. starts a transactor with a custom data-dir configured via property file
 3. creates a new database
 4. installs two string attributes without index
 5. adds data (~ 100 facts per attribute are enough)
