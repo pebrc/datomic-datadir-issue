@@ -1,11 +1,18 @@
 #!/bin/bash
 #
-trap "kill 0" SIGINT
-export DATOMIC=/opt/sw/datomic-pro-0.9.5350
 WORKDIR=`pwd`
-CONFIG=$WORKDIR/cassandra-txtor.properties
+#Set this to the location of your Datomic distribution
+export DATOMIC=/opt/sw/datomic-pro-0.9.5350
+
+#CONFIG=$WORKDIR/cassandra-txtor.properties
+CONFIG=$WORKDIR/file-txtor.properties
+#this setting needs to match what you configure in the transactor props
 DATADIR=/var/lib/datomic
+
+#this user will also run the transactor 
 USER=`whoami`
+
+trap "kill 0" SIGINT
 #remove read access to distr data dir
 sudo chmod 555 $DATOMIC/data
 #create configured data dir
