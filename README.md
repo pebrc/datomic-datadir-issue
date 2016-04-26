@@ -5,7 +5,7 @@ Preconditions
 =============
 
 1. Working Java setup 
-2. Datomic Pro 0.9.5390
+2. Datomic Pro > 0.9.5390
 3. transactor config file: 
    1. You need to set up your license plus the data-dir setting.
    2. The data-dir setting needs to match the DATADIR in `run.sh`
