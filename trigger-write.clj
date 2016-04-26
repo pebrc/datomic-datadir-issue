@@ -29,9 +29,6 @@
 
 (def conn (d/connect db-uri))
 
-(def datomic-distr (System/getenv "DATOMIC"))
-
-
 (def minimal-schema  [{:db/id #db/id[:db.part/db]
                         :db/ident :a/x
                         :db/valueType :db.type/string

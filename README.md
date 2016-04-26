@@ -19,9 +19,11 @@ How to run
 1. Start your storage (skip when using dev storage)
 2. ```./run.sh``` (make it executable first)
 
-Tested with
+Platform Specifics/Tested with
 ===========
 * Mac OS X/datomic pro 0.9.5390/cassandra + dev storage
+* You might need to adjust the hardcode 2 sec wait for the transactor to boot up in trigger-write.clj
+
 
 What it does
 ============
@@ -29,7 +31,7 @@ What it does
 2. startes a transactor with a custom data-dir configured via property file
 3. creates a new database
 4. installs two string attributes without index
-5. add data (~ 100 facts per attribute are enough)
+5. adds data (~ 100 facts per attribute are enough)
 6. alters the schema for each attribute to have an index
 7. transactor ignores the data-dir setting tries to write to distribution directory which failes (see step 1) and exits.
 
