@@ -22,7 +22,7 @@ How to run
 Platform Specifics/Tested with
 ===========
 * Mac OS X/datomic pro 0.9.5390/datomic pro 0.9.5359/cassandra + dev storage
-* You might need to adjust the hardcode 2 sec wait for the transactor to boot up in trigger-write.clj
+* You might need to adjust the hardcoded 2 sec wait for the transactor to boot up in trigger-write.clj
 
 
 
@@ -34,7 +34,7 @@ What it does
 4. installs two string attributes without index
 5. adds data (~ 100 facts per attribute are enough)
 6. alters the schema for each attribute to have an index
-7. transactor ignores the data-dir setting tries to write to distribution directory which failes (see step 1) and exits.
+7. transactor ignores the data-dir setting tries to write to distribution directory which fails (see step 1) and exits.
 
 
 
