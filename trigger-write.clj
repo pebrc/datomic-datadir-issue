@@ -4,12 +4,15 @@
   (println "\u001B[32m" "=>" s "\u001B[0m"))
 
 (defn random-str [n l]
-  (take n
-        (repeatedly (fn []
-                      (reduce str
-                              (take l
-                                    (repeatedly
-                                     #(rand-nth "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"))))))))
+  (take
+   n
+   (repeatedly
+    (fn []
+      (reduce
+       str
+       (take l
+             (repeatedly
+              #(rand-nth "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"))))))))
 
 (def num-inserts 100)
 
@@ -30,17 +33,17 @@
 (def conn (d/connect db-uri))
 
 (def minimal-schema  [{:db/id #db/id[:db.part/db]
-                        :db/ident :a/x
-                        :db/valueType :db.type/string
-                        :db/cardinality :db.cardinality/one
-                        :db/doc "A x"
+                       :db/ident :a/x
+                       :db/valueType :db.type/string
+                       :db/cardinality :db.cardinality/one
+                       :db/doc "A x"
                        :db.install/_attribute :db.part/db}
                       {:db/id #db/id[:db.part/db]
-                        :db/ident :a/y
-                        :db/valueType :db.type/string
-                        :db/cardinality :db.cardinality/one
-                        :db/doc "A y"
-                        :db.install/_attribute :db.part/db}])
+                       :db/ident :a/y
+                       :db/valueType :db.type/string
+                       :db/cardinality :db.cardinality/one
+                       :db/doc "A y"
+                       :db.install/_attribute :db.part/db}])
 
 (log "installing schema")
 @(d/transact conn minimal-schema)
@@ -49,14 +52,14 @@
 
 (try
   (doall (->> (random-str num-inserts 50)
-                 (map #(assoc {} :db/id (d/tempid :db.part/user) :a/x % :a/y %))
-                 (partition 100)
-                 (map #(d/transact conn (into [] %)))
-                 (map deref)))
+              (map #(assoc {} :db/id (d/tempid :db.part/user) :a/x % :a/y %))
+              (partition 100)
+              (map #(d/transact conn (into [] %)))
+              (map deref)))
   (catch Exception e (log (.getMessage e))))
 
 
-(def indexed { :db/index true
+(def indexed {:db/index true
               :db.alter/_attribute :db.part/db})
 
 
@@ -66,9 +69,11 @@
 
 (def attrs [{:db/id :a/x} {:db/id :a/y}])
 
-(doall (map #(->> (merge indexed %)
-                  ((fn [tx] (d/transact conn (conj  [] tx))))
-                  (deref)) attrs))
+(doall
+ (map #(->> (merge indexed %)
+            ((fn [tx] (d/transact conn (conj  [] tx))))
+            (deref))
+      attrs))
 
 
 
